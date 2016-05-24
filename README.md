@@ -1,3 +1,2 @@
-# Core\Storage
-
-A simple OOP storage library with iteration and array access.
+# core-asset
+Simple assetmanager with asset processor support.
