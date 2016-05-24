@@ -1,0 +1,17 @@
+{
+  "name" : "tekkla/core-asset",
+  "description" : "Assetmanager",
+  "require" : {
+    "php" : ">=7.0.0"
+  },
+  "minimum-stability" : "dev",
+  "autoload" : {
+    "psr-0" : {
+      "Core\\Asset" : ""
+    }
+  },
+  "authors" : [ {
+    "name" : "Michael Zorn",
+    "email" : "tekkla@tekkla.de"
+  } ]
+}
