@@ -116,12 +116,14 @@ class CssHandler extends AbstractAssetHandler
 
             // Rewrite images path
             $combined = str_replace('../img/', '../Themes/' . $theme . '/img/', $combined);
+
+            foreach ($this->processors as $processor) {
+                $combined = $processor->process($combined);
+            }
+
+            return $combined;
         }
 
-        foreach ($this->processors as $processor) {
-            $combined = $processor->process($combined);
-        }
-
-        return $combined;
+        return false;
     }
 }

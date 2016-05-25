@@ -243,6 +243,7 @@ class JavascriptHandler extends AbstractAssetHandler
         // Init js storages
         $files = $blocks = $inline = $scripts = $ready = $vars = $local_files = [];
 
+
         /* @var $script JavascriptObject */
         foreach ($this->objects as $key => $script) {
 
@@ -315,12 +316,15 @@ class JavascriptHandler extends AbstractAssetHandler
             if ($blocks) {
                 $combined .= implode($blocks);
             }
+
+
+            foreach ($this->processors as $processor) {
+                $combined = $processor->process($combined);
+            }
+
+            return $combined;
         }
 
-        foreach ($this->processors as $processor) {
-            $combined = $processor->process($combined);
-        }
-
-        return $combined;
+        return false;
     }
 }
