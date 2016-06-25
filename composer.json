@@ -1,27 +1,23 @@
 {
-    "name": "tekkla/core-asset",
-    "description": "Simple assetmanager with asset processor support.",
-    "license": "MIT",
-    "type": "library",
-    "keywords": [
-        "asset",
-        "manager",
-        "process"
-    ],
-    "homepage": "https://github.com/Tekkla/core-asset",
-    "require": {
-        "php": ">=7.0.0"
-    },
-    "autoload": {
-        "psr-0": {
-            "Core\\Asset": ""
-        }
-    },
-    "authors": [
-        {
-            "name": "Michael Zorn",
-            "email": "tekkla@tekkla.de",
-            "role": "Developer"
-        }
-    ]
+  "name" : "tekkla/core-asset",
+  "description" : "Simple assetmanager with asset processor support.",
+  "require" : {
+    "php" : ">=7.0.0",
+    "tedivm/jshrink" : "v1.1.0",
+    "mrclay/minify" : "2.3.0"
+  },
+  "license" : "MIT",
+  "keywords" : [ "asset", "manager", "process" ],
+  "autoload" : {
+    "psr-0" : {
+      "Core\\Asset" : ""
+    }
+  },
+  "type" : "library",
+  "homepage" : "https://github.com/Tekkla/core-asset",
+  "authors" : [ {
+    "name" : "Michael Zorn",
+    "email" : "tekkla@tekkla.de",
+    "role" : "Developer"
+  } ]
 }
