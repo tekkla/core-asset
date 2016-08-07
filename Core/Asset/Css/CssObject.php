@@ -10,30 +10,16 @@ use Core\Asset\AbstractAssetObject;
  * @copyright 2016
  * @license MIT
  */
-class CssObject extends AbstractAssetObject
+class CssObject extends AbstractAssetObject implements CssObjectInterface
 {
 
     /**
-     * Css type 'file'
+     * (non-PHPdoc)
      *
-     * @var string
+     * @see \Core\Asset\AssetObjectInterface::setType()
+     *
      */
-    const TYPE_FILE = 'file';
-
-    /**
-     * Css type 'inline'
-     *
-     * @var string
-     */
-    const TYPE_INLINE = 'inline';
-
-    /**
-     *
-     * {@inheritDoc}
-     *
-     * @see \Core\Asset\AbstractAssetObject::setType()
-     */
-    public function setType($type)
+    public function setType(string $type)
     {
         $types = [
             self::TYPE_FILE,
@@ -45,7 +31,5 @@ class CssObject extends AbstractAssetObject
         }
 
         $this->type = $type;
-
-        return $this;
     }
 }

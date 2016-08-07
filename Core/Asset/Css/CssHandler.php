@@ -21,6 +21,48 @@ class CssHandler extends AbstractAssetHandler
     protected $type = self::TYPE_CSS;
 
     /**
+     *
+     * @var string
+     */
+    private $basedir = '';
+
+    /**
+     *
+     * @var string
+     */
+    private $baseurl = '';
+
+    /**
+     * Sets basedir which gets used on getContent() while analyzing file objects
+     *
+     * @param string $basedir
+     */
+    public function setBasedir(string $basedir)
+    {
+        $this->basedir = $basedir;
+    }
+
+    /**
+     * Returns set basedir
+     *
+     * @return string
+     */
+    public function getBasedir(): string
+    {
+        return $this->basedir;
+    }
+
+    /**
+     * Sets baseurl which gets used on getContent() while analyzing file objects
+     *
+     * @param string $baseurl
+     */
+    public function setBaseurl(string $baseurl)
+    {
+        $this->baseurl = $baseurl;
+    }
+
+    /**
      * Creates and returns a link css object.
      *
      * @param string $url
@@ -63,8 +105,13 @@ class CssHandler extends AbstractAssetHandler
      */
     public function getContent()
     {
-        if (empty($this->objects)) {
-            return '';
+
+        if (empty($this->basedir)) {
+            Throw new CssException('No basedir set.');
+        }
+
+        if (empty($this->baseurl)) {
+            Throw new CssException('No baseurl set.');
         }
 
         $files = [];
@@ -79,8 +126,8 @@ class CssHandler extends AbstractAssetHandler
 
                     $filename = $css->getContent();
 
-                    if (strpos($filename, BASEURL) !== false) {
-                        $local_files[] = str_replace(BASEURL, BASEDIR, $filename);
+                    if (strpos($filename, $this->baseurl) !== false) {
+                        $local_files[] = str_replace($this->baseurl, $this->basedir, $filename);
                     }
                     else {
                         $files[] = $filename;
@@ -108,14 +155,6 @@ class CssHandler extends AbstractAssetHandler
             if (!empty($inline)) {
                 $combined .= implode(PHP_EOL, $inline);
             }
-
-            $theme = 'Core';
-
-            // Rewrite fonts paths
-            $combined = str_replace('../fonts/', '../Themes/' . $theme . '/fonts/', $combined);
-
-            // Rewrite images path
-            $combined = str_replace('../img/', '../Themes/' . $theme . '/img/', $combined);
 
             foreach ($this->processors as $processor) {
                 $combined = $processor->process($combined);

@@ -44,6 +44,58 @@ class JavascriptHandler extends AbstractAssetHandler
     private static $filecounter = 0;
 
     /**
+     *
+     * @var string
+     */
+    private $basedir = '';
+
+    /**
+     *
+     * @var string
+     */
+    private $baseurl = '';
+
+    /**
+     * Sets basedir which gets used on getContent() while analyzing file objects
+     *
+     * @param string $basedir
+     */
+    public function setBasedir(string $basedir)
+    {
+        $this->basedir = $basedir;
+    }
+
+    /**
+     * Returns set basedir
+     *
+     * @return string
+     */
+    public function getBasedir(): string
+    {
+        return $this->basedir;
+    }
+
+    /**
+     * Sets baseurl which gets used on getContent() while analyzing file objects
+     *
+     * @param string $baseurl
+     */
+    public function setBaseurl(string $baseurl)
+    {
+        $this->baseurl = $baseurl;
+    }
+
+    /**
+     * Returns set baseurl
+     *
+     * @return string
+     */
+    public function getBaseurl(): string
+    {
+        return $this->baseurl;
+    }
+
+    /**
      * Adds an javascript objectto the content.
      *
      * @param JavascriptHandler $script
@@ -234,15 +286,23 @@ class JavascriptHandler extends AbstractAssetHandler
 
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Core\Asset\AbstractAssetHandler::getContent()
      */
     public function getContent()
     {
+
+        if (empty($this->basedir)) {
+            Throw new JavascriptException('No basedir set.');
+        }
+
+        if (empty($this->baseurl)) {
+            Throw new JavascriptException('No baseurl set.');
+        }
+
         // Init js storages
         $files = $blocks = $inline = $scripts = $ready = $vars = $local_files = [];
-
 
         /* @var $script JavascriptObject */
         foreach ($this->objects as $key => $script) {
@@ -253,8 +313,8 @@ class JavascriptHandler extends AbstractAssetHandler
                 case 'file':
                     $filename = $script->getContent();
 
-                    if (strpos($filename, BASEURL) !== false && $script->getCombine()) {
-                        $local_files[] = str_replace(BASEURL, BASEDIR, $filename);
+                    if (strpos($filename, $this->baseurl) !== false && $script->getCombine()) {
+                        $local_files[] = str_replace($this->baseurl, $this->basedir, $filename);
                     }
                     else {
                         $files[] = $filename;
@@ -316,7 +376,6 @@ class JavascriptHandler extends AbstractAssetHandler
             if ($blocks) {
                 $combined .= implode($blocks);
             }
-
 
             foreach ($this->processors as $processor) {
                 $combined = $processor->process($combined);

@@ -11,21 +11,31 @@ namespace Core\Asset;
 interface AssetObjectInterface
 {
 
-    public function setMinify($minify);
+    /**
+     * Sets minify flag
+     *
+     * @param bool $minify
+     */
+    public function setMinify(bool $minify);
 
-    public function getMinify();
+    /**
+     * Returns minify flag
+     *
+     * @return bool
+     */
+    public function getMinify(): bool;
 
     /**
      * Sets objects content
      *
-     * @param string $content
+     * @param mixed $content
      */
     public function setContent($content);
 
     /**
      * Get objects content
      *
-     * @return string
+     * @return mixed
      */
     public function getContent();
 
@@ -34,20 +44,54 @@ interface AssetObjectInterface
      *
      * @param string $type
      */
-    public function setType($type);
+    public function setType(string $type);
 
     /**
      * Returns objects type
      *
      * @return string
      */
-    public function getType();
+    public function getType(): string;
 
-    public function setCombine($combine);
+    /**
+     * Sets combine flag
+     *
+     * @param bool $combine
+     */
+    public function setCombine(bool $combine);
 
-    public function getCombine();
+    /**
+     * Returns combine flag
+     *
+     * @return bool
+     */
+    public function getCombine(): bool;
 
-    public function setId($id);
+    /**
+     * Sets object id
+     *
+     * @param string $id
+     */
+    public function setId(string $id);
 
-    public function getId();
+    /**
+     * Returns object it
+     *
+     * @return string
+     */
+    public function getId(): string;
+
+    /**
+     * Sets external flag
+     *
+     * @param bool $external
+     */
+    public function setExternal(bool $external);
+
+    /**
+     * Returns external flag
+     *
+     * @return bool
+     */
+    public function getExternal(): bool;
 }

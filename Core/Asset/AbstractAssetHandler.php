@@ -42,7 +42,7 @@ abstract class AbstractAssetHandler implements AssetHandlerInterface
 
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Core\Asset\AssetHandlerInterface::getType()
      */
@@ -57,7 +57,7 @@ abstract class AbstractAssetHandler implements AssetHandlerInterface
 
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Core\Asset\AssetHandlerInterface::setType()
      */
@@ -68,7 +68,7 @@ abstract class AbstractAssetHandler implements AssetHandlerInterface
 
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Core\Asset\AssetHandlerInterface::createObject()
      */
@@ -80,7 +80,7 @@ abstract class AbstractAssetHandler implements AssetHandlerInterface
 
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Core\Asset\AssetHandlerInterface::addObject()
      */
@@ -91,7 +91,7 @@ abstract class AbstractAssetHandler implements AssetHandlerInterface
 
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Core\Asset\AssetHandlerInterface::getObjects()
      */
@@ -102,7 +102,7 @@ abstract class AbstractAssetHandler implements AssetHandlerInterface
 
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Core\Asset\AssetHandlerInterface::addProcessor()
      */
@@ -111,10 +111,10 @@ abstract class AbstractAssetHandler implements AssetHandlerInterface
         $this->processors[] = $processor;
     }
 
-
-
     /**
-     * {@inheritDoc}
+     *
+     * {@inheritdoc}
+     *
      * @see \Core\Asset\AssetHandlerInterface::setFileHandler()
      */
     public function setFileHandler(\Core\Asset\AssetFilehandlerInterface $filehandler)
@@ -122,15 +122,14 @@ abstract class AbstractAssetHandler implements AssetHandlerInterface
         $this->filehandler = $filehandler;
     }
 
-
-
     /**
-     * {@inheritDoc}
+     *
+     * {@inheritdoc}
+     *
      * @see \Core\Asset\AssetHandlerInterface::process()
      */
     public function process()
     {
-
         if (!isset($this->filehandler)) {
             Throw new AssetHandlerException('No filemanager set.');
         }
@@ -139,12 +138,11 @@ abstract class AbstractAssetHandler implements AssetHandlerInterface
             $this->filehandler->setContent($this->getContent());
             $this->filehandler->write();
         }
-
     }
 
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Core\Asset\AssetHandlerInterface::getContent()
      */

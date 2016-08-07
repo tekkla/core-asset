@@ -15,25 +15,37 @@ abstract class AbstractAssetObject implements AssetObjectInterface
      *
      * @var string
      */
-    protected  $content;
+    protected $content;
 
     /**
      *
      * @var boolean
      */
-    protected  $combine = true;
+    protected $combine = true;
 
     /**
      *
      * @var boolean
      */
-    protected  $minify = true;
+    protected $minify = true;
 
     /**
      *
      * @var string
      */
-    protected  $id = '';
+    protected $id = '';
+
+    /**
+     *
+     * @var bool
+     */
+    protected $external = false;
+
+    /**
+     *
+     * @var string
+     */
+    protected $type;
 
     /**
      * (non-PHPdoc)
@@ -41,7 +53,7 @@ abstract class AbstractAssetObject implements AssetObjectInterface
      * @see \Core\Asset\AssetObjectInterface::getMinify()
      *
      */
-    public function getMinify()
+    public function getMinify(): bool
     {
         return $this->minify;
     }
@@ -63,9 +75,9 @@ abstract class AbstractAssetObject implements AssetObjectInterface
      * @see \Core\Asset\AssetObjectInterface::setCombine()
      *
      */
-    public function setCombine($combine)
+    public function setCombine(bool $combine)
     {
-        $this->combine = (bool) $combine;
+        $this->combine = $combine;
     }
 
     /**
@@ -74,7 +86,7 @@ abstract class AbstractAssetObject implements AssetObjectInterface
      * @see \Core\Asset\AssetObjectInterface::getType()
      *
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -96,7 +108,7 @@ abstract class AbstractAssetObject implements AssetObjectInterface
      * @see \Core\Asset\AssetObjectInterface::getCombine()
      *
      */
-    public function getCombine()
+    public function getCombine(): bool
     {
         return $this->combine;
     }
@@ -107,7 +119,7 @@ abstract class AbstractAssetObject implements AssetObjectInterface
      * @see \Core\Asset\AssetObjectInterface::setId()
      *
      */
-    public function setId($id)
+    public function setId(string $id)
     {
         $this->id = $id;
     }
@@ -118,9 +130,9 @@ abstract class AbstractAssetObject implements AssetObjectInterface
      * @see \Core\Asset\AssetObjectInterface::getId()
      *
      */
-    public function getId()
+    public function getId(): string
     {
-        return $this->id;
+        return $this->id ?? '';
     }
 
     /**
@@ -129,9 +141,9 @@ abstract class AbstractAssetObject implements AssetObjectInterface
      * @see \Core\Asset\AssetObjectInterface::setMinify()
      *
      */
-    public function setMinify($minify)
+    public function setMinify(bool $minify)
     {
-        $this->minify = (bool) $minify;
+        $this->minify = $minify;
     }
 
     /**
@@ -140,8 +152,30 @@ abstract class AbstractAssetObject implements AssetObjectInterface
      * @see \Core\Asset\AssetObjectInterface::setType()
      *
      */
-    public function setType($type)
+    public function setType(string $type)
     {
         $this->type = $type;
+    }
+
+    /**
+     *
+     * {@inheritdoc}
+     *
+     * @see \Core\Asset\AssetObjectInterface::getExternal()
+     */
+    public function getExternal(): bool
+    {
+        return $this->external;
+    }
+
+    /**
+     *
+     * {@inheritdoc}
+     *
+     * @see \Core\Asset\AssetObjectInterface::setExternal($external)
+     */
+    public function setExternal(bool $external)
+    {
+        $this->external = $external;
     }
 }

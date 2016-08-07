@@ -10,57 +10,8 @@ use Core\Asset\AbstractAssetObject;
  * @copyright 2016
  * @license MIT
  */
-class JavascriptObject extends AbstractAssetObject
+class JavascriptObject extends AbstractAssetObject implements JavascriptObjectInterface
 {
-
-    /**
-     * Javascript type 'file'
-     *
-     * @var string
-     */
-    const TYPE_FILE = 'file';
-
-    /**
-     * Javascript type 'script'
-     *
-     * @var string
-     */
-    const TYPE_SCRIPT = 'script';
-
-    /**
-     * Javascript type 'block'
-     *
-     * @var string
-     */
-    const TYPE_BLOCK = 'block';
-
-    /**
-     * Javascript type 'ready'
-     *
-     * @var string
-     */
-    const TYPE_READY = 'ready';
-
-    /**
-     * Javascript type 'var'
-     *
-     * @var string
-     */
-    const TYPE_VAR = 'var';
-
-    /**
-     * Javascript position 'top'
-     *
-     * @var string
-     */
-    const AREA_TOP = 'top';
-
-    /**
-     * Javascript type 'below'
-     *
-     * @var string
-     */
-    const AREA_BELOW = 'below';
 
     /**
      * Header (false) or scripts (true) below body? This is the target for.
@@ -69,15 +20,8 @@ class JavascriptObject extends AbstractAssetObject
      */
     private $defer = false;
 
-    /**
-     *
-     * {@inheritDoc}
-     *
-     * @see \Core\Asset\AbstractAssetObject::setType()
-     *
-     * @throws JavascriptException
-     */
-    public function setType($type)
+
+    public function setType(string $type)
     {
         $types = [
             self::TYPE_FILE,
@@ -93,24 +37,21 @@ class JavascriptObject extends AbstractAssetObject
 
         $this->type = $type;
     }
-
     /**
-     * Sets the objects defer state.
-     *
-     * @param bool $defer
+     * {@inheritDoc}
+     * @see \Core\Asset\Javascript\JavascriptObjectInterface::getDefer()
      */
-    public function setDefer($defer)
+    public function getDefer(): bool
     {
-        $this->defer = (bool) $defer;
+        return $this->defer;
     }
 
     /**
-     * Returns the objects defer state
-     *
-     * @return boolean
+     * {@inheritDoc}
+     * @see \Core\Asset\Javascript\JavascriptObjectInterface::setDefer($defer)
      */
-    public function getDefer()
+    public function setDefer(bool $defer)
     {
-        return $this->defer;
+        $this->defer = $defer;
     }
 }
