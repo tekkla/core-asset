@@ -79,4 +79,11 @@ interface AssetHandlerInterface
      * Processes all objects and creates the final asset file
      */
     public function process();
+
+    /**
+     * Returns an array of external files that won't get processed by the AssetHandler
+     *
+     * @return array
+     */
+    public function getFiles(): array;
 }

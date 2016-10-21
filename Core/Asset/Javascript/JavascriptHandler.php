@@ -292,7 +292,6 @@ class JavascriptHandler extends AbstractAssetHandler
      */
     public function getContent()
     {
-
         if (empty($this->basedir)) {
             Throw new JavascriptException('No basedir set.');
         }
@@ -302,7 +301,7 @@ class JavascriptHandler extends AbstractAssetHandler
         }
 
         // Init js storages
-        $files = $blocks = $inline = $scripts = $ready = $vars = $local_files = [];
+        $local_files = $scripts = $vars = $blocks = $ready = [];
 
         /* @var $script JavascriptObject */
         foreach ($this->objects as $key => $script) {
@@ -317,18 +316,13 @@ class JavascriptHandler extends AbstractAssetHandler
                         $local_files[] = str_replace($this->baseurl, $this->basedir, $filename);
                     }
                     else {
-                        $files[] = $filename;
+                        $this->files[] = $filename;
                     }
                     break;
 
                 // Script to create
                 case 'script':
-                    $inline[] = $script->getContent();
-                    break;
-
-                // Dedicated block to embaed
-                case 'block':
-                    $blocks[] = $script->getContent();
+                    $scripts[] = $script->getContent();
                     break;
 
                 // A variable to publish to global space
@@ -341,6 +335,11 @@ class JavascriptHandler extends AbstractAssetHandler
                 case 'ready':
                     $ready[] = $script->getContent();
                     break;
+
+                // Dedicated block to embaed
+                case 'block':
+                    $blocks[] = $script->getContent();
+                    break;
             }
 
             // Remove worked script object
@@ -348,33 +347,39 @@ class JavascriptHandler extends AbstractAssetHandler
         }
 
         // Check cache
-        if ($local_files || $inline || $vars || $scripts || $ready) {
+        if ($local_files || $scripts || $vars || $ready || $blocks) {
 
             // Strat combining all parts
             $combined = '';
 
+            // Add content
             if ($local_files) {
                 foreach ($local_files as $js_file) {
                     $combined .= file_get_contents($js_file);
                 }
             }
 
-            if ($inline) {
-                $combined .= implode('', $inline);
+            if ($scripts) {
+                $combined .= implode(PHP_EOL, $scripts);
             }
 
             if ($vars) {
                 foreach ($vars as $name => $val) {
-                    $combined .= 'var ' . $name . ' = ' . (is_string($val) ? '"' . $val . '"' : $val) . ';';
+
+                    // Namespace or simple var?
+                    $combined .= PHP_EOL . (strpos($name, '.') !== false) ? $name : 'var ' . $name;
+
+                    // Append var value
+                    $combined .= ' = ' . (is_string($val) ? '"' . $val . '"' : $val) . ';';
                 }
             }
 
             if ($ready) {
-                $combined .= '$(document).ready(function() {' . implode('', $ready) . '});';
+                $combined .= '$(document).ready(function() {' . implode(PHP_EOL, $ready) . '});';
             }
 
             if ($blocks) {
-                $combined .= implode($blocks);
+                $combined .= implode(PHP_EOL, $blocks);
             }
 
             foreach ($this->processors as $processor) {

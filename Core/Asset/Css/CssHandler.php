@@ -105,7 +105,6 @@ class CssHandler extends AbstractAssetHandler
      */
     public function getContent()
     {
-
         if (empty($this->basedir)) {
             Throw new CssException('No basedir set.');
         }
@@ -114,7 +113,6 @@ class CssHandler extends AbstractAssetHandler
             Throw new CssException('No baseurl set.');
         }
 
-        $files = [];
         $local_files = [];
         $inline = [];
 
@@ -130,7 +128,7 @@ class CssHandler extends AbstractAssetHandler
                         $local_files[] = str_replace($this->baseurl, $this->basedir, $filename);
                     }
                     else {
-                        $files[] = $filename;
+                        $this->files[] = $filename;
                     }
 
                     break;

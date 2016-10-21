@@ -8,7 +8,7 @@ namespace Core\Asset;
  * @copyright 2016
  * @license MIT
  */
-abstract class AbstractAssetFileHandler implements AssetFileHandlerInterface
+abstract class AbstractAssetFileHandler implements AssetFilehandlerInterface
 {
 
     /**

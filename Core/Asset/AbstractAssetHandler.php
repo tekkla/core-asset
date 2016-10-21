@@ -42,6 +42,12 @@ abstract class AbstractAssetHandler implements AssetHandlerInterface
 
     /**
      *
+     * @var array
+     */
+    protected $files = [];
+
+    /**
+     *
      * {@inheritdoc}
      *
      * @see \Core\Asset\AssetHandlerInterface::getType()
@@ -138,6 +144,17 @@ abstract class AbstractAssetHandler implements AssetHandlerInterface
             $this->filehandler->setContent($this->getContent());
             $this->filehandler->write();
         }
+    }
+
+    /**
+     *
+     * {@inheritdoc}
+     *
+     * @see \Core\Asset\AssetHandlerInterface::getFiles()
+     */
+    public function getFiles(): array
+    {
+        return $this->files;
     }
 
     /**
