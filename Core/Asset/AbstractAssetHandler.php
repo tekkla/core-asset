@@ -36,7 +36,7 @@ abstract class AbstractAssetHandler implements AssetHandlerInterface
 
     /**
      *
-     * @var AssetFilehandlerInterface
+     * @var AssetFileHandlerInterface
      */
     protected $filehandler;
 
@@ -123,7 +123,7 @@ abstract class AbstractAssetHandler implements AssetHandlerInterface
      *
      * @see \Core\Asset\AssetHandlerInterface::setFileHandler()
      */
-    public function setFileHandler(\Core\Asset\AssetFilehandlerInterface $filehandler)
+    public function setFileHandler(\Core\Asset\AssetFileHandlerInterface $filehandler)
     {
         $this->filehandler = $filehandler;
     }

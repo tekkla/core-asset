@@ -8,7 +8,7 @@ namespace Core\Asset;
  * @copyright 2016
  * @license MIT
  */
-abstract class AbstractAssetFileHandler implements AssetFilehandlerInterface
+abstract class AbstractAssetFileHandler implements AssetFileHandlerInterface
 {
 
     /**
@@ -66,7 +66,7 @@ abstract class AbstractAssetFileHandler implements AssetFilehandlerInterface
      *
      * {@inheritDoc}
      *
-     * @see \Core\Asset\AssetFilehandlerInterface::checkTTL()
+     * @see \Core\Asset\AssetFileHandlerInterface::checkTTL()
      */
     public function checkTTL()
     {
@@ -81,7 +81,7 @@ abstract class AbstractAssetFileHandler implements AssetFilehandlerInterface
      *
      * {@inheritDoc}
      *
-     * @see \Core\Asset\AssetFilehandlerInterface::write()
+     * @see \Core\Asset\AssetFileHandlerInterface::write()
      */
     public function write()
     {

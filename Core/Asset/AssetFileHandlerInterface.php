@@ -8,7 +8,7 @@ namespace Core\Asset;
  * @copyright 2016
  * @license MIT
  */
-interface AssetFilehandlerInterface
+interface AssetFileHandlerInterface
 {
 
     public function setFilename($filename);

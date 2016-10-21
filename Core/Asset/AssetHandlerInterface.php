@@ -64,9 +64,9 @@ interface AssetHandlerInterface
 
     /**
      *
-     * @param AssetFilehandlerInterface $filehandler
+     * @param AssetFileHandlerInterface $filehandler
      */
-    public function setFileHandler(AssetFilehandlerInterface $filehandler);
+    public function setFileHandler(AssetFileHandlerInterface $filehandler);
 
     /**
      * Processes all asset objects and returns the sresult;
