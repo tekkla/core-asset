@@ -49,25 +49,23 @@ abstract class AbstractAssetHandler implements AssetHandlerInterface
     /**
      *
      * {@inheritdoc}
-     *
      * @see \Core\Asset\AssetHandlerInterface::getType()
      */
-    public function getType()
+    public function getType(): string
     {
         if (empty($this->type)) {
             Throw new AssetHandlerException('No type set for this AssetHandler.');
         }
-
+        
         return $this->type;
     }
 
     /**
      *
      * {@inheritdoc}
-     *
      * @see \Core\Asset\AssetHandlerInterface::setType()
      */
-    public function setType($type)
+    public function setType(string $type)
     {
         $this->type = $type;
     }
@@ -75,10 +73,9 @@ abstract class AbstractAssetHandler implements AssetHandlerInterface
     /**
      *
      * {@inheritdoc}
-     *
      * @see \Core\Asset\AssetHandlerInterface::createObject()
      */
-    public function createObject()
+    public function createObject(): AssetObjectInterface
     {
         $class = get_called_class();
         return new $class();
@@ -87,7 +84,6 @@ abstract class AbstractAssetHandler implements AssetHandlerInterface
     /**
      *
      * {@inheritdoc}
-     *
      * @see \Core\Asset\AssetHandlerInterface::addObject()
      */
     public function addObject(AssetObjectInterface $aio)
@@ -97,11 +93,12 @@ abstract class AbstractAssetHandler implements AssetHandlerInterface
 
     /**
      *
-     * {@inheritdoc}
+     * /**
      *
+     * {@inheritdoc}
      * @see \Core\Asset\AssetHandlerInterface::getObjects()
      */
-    public function getObjects()
+    public function getObjects(): array
     {
         return $this->objects;
     }
@@ -109,7 +106,6 @@ abstract class AbstractAssetHandler implements AssetHandlerInterface
     /**
      *
      * {@inheritdoc}
-     *
      * @see \Core\Asset\AssetHandlerInterface::addProcessor()
      */
     public function addProcessor(ProcessorInterface $processor)
@@ -120,10 +116,9 @@ abstract class AbstractAssetHandler implements AssetHandlerInterface
     /**
      *
      * {@inheritdoc}
-     *
      * @see \Core\Asset\AssetHandlerInterface::setFileHandler()
      */
-    public function setFileHandler(\Core\Asset\AssetFileHandlerInterface $filehandler)
+    public function setFileHandler(AssetFileHandlerInterface $filehandler)
     {
         $this->filehandler = $filehandler;
     }
@@ -131,15 +126,14 @@ abstract class AbstractAssetHandler implements AssetHandlerInterface
     /**
      *
      * {@inheritdoc}
-     *
      * @see \Core\Asset\AssetHandlerInterface::process()
      */
     public function process()
     {
-        if (!isset($this->filehandler)) {
+        if (! isset($this->filehandler)) {
             Throw new AssetHandlerException('No filemanager set.');
         }
-
+        
         if ($this->filehandler->checkTTL() == false) {
             $this->filehandler->setContent($this->getContent());
             $this->filehandler->write();
@@ -149,7 +143,6 @@ abstract class AbstractAssetHandler implements AssetHandlerInterface
     /**
      *
      * {@inheritdoc}
-     *
      * @see \Core\Asset\AssetHandlerInterface::getFiles()
      */
     public function getFiles(): array
@@ -160,8 +153,7 @@ abstract class AbstractAssetHandler implements AssetHandlerInterface
     /**
      *
      * {@inheritdoc}
-     *
      * @see \Core\Asset\AssetHandlerInterface::getContent()
      */
-    abstract public function getContent();
+    abstract public function getContent(): string;
 }

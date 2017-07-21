@@ -8,7 +8,7 @@ use Core\Asset\Css\CssHandler;
  * AssetManager.php
  *
  * @author Michael "Tekkla" Zorn <tekkla@tekkla.de>
- * @copyright 2016
+ * @copyright 2016-2017
  * @license MIT
  */
 class AssetManager
@@ -21,11 +21,12 @@ class AssetManager
     private $handler = [];
 
     /**
-     *
-     * @param unknown $id
+     * Registers an AssetHandler under a given id
+     * 
+     * @param string $id
      * @param AssetHandlerInterface $ah
      */
-    public function registerAssetHandler($id, AssetHandlerInterface $ah)
+    public function registerAssetHandler(string $id, AssetHandlerInterface $ah)
     {
         $this->handler[$id] = $ah;
     }
@@ -40,7 +41,7 @@ class AssetManager
      *
      * @return AssetHandlerInterface
      */
-    public function &getAssetHandler($id)
+    public function &getAssetHandler(string $id)
     {
         if (empty($this->handler[$id])) {
             Throw new AssetManagerException(sprintf('There is no registered "%s" asset handler.', $id));
@@ -59,12 +60,14 @@ class AssetManager
      * @param string $id
      *            The id under which the asset handler will be registered in AssetManager.
      *            Applies only when $autoregister is true.
-     * @param boolean $autoregister
+     * @param bool $autoregister
      *            Flag to autoregister the created asset handler in AssetManager (Default: true)
      *
      * @return AssetHandlerInterface
+     * 
+     * @todo Remove this from here because it hardcodes realtions to other objects without a chance of adding future asset handler types
      */
-    public function createAssetHandler($type, $id, $autoregister = true)
+    public function createAssetHandler(string $type, string $id, bool $autoregister = true): AssetHandlerInterface
     {
         switch ($type) {
             case AssetHandlerInterface::TYPE_JS:
@@ -101,4 +104,3 @@ class AssetManager
         }
     }
 }
-

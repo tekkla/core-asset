@@ -25,21 +25,21 @@ interface AssetHandlerInterface
      * @param string $type
      *            Type of asset handler. Can be 'js', 'css' or 'img'.
      */
-    public function setType($type);
+    public function setType(string $type);
 
     /**
      * Returns type of asset handler
      *
      * @return string
      */
-    public function getType();
+    public function getType(): string;
 
     /**
      * Creates and returns an object implementing an AssetObjectInterface
      *
      * @return AssetObjectInterface
      */
-    public function createObject();
+    public function createObject(): AssetObjectInterface;
 
     /**
      * Adds object to the asset handler object stack
@@ -53,7 +53,7 @@ interface AssetHandlerInterface
      *
      * @return array
      */
-    public function getObjects();
+    public function getObjects(): array;
 
     /**
      * Add a processor to the handler
@@ -73,7 +73,7 @@ interface AssetHandlerInterface
      *
      * @return string
      */
-    public function getContent();
+    public function getContent(): string;
 
     /**
      * Processes all objects and creates the final asset file

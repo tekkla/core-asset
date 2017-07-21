@@ -5,19 +5,41 @@ namespace Core\Asset;
  * AssetFileHandlerInterface.php
  *
  * @author Michael "Tekkla" Zorn <tekkla@tekkla.de>
- * @copyright 2016
+ * @copyright 2016-2017
  * @license MIT
  */
 interface AssetFileHandlerInterface
 {
 
-    public function setFilename($filename);
+    /**
+     * Sets the filename
+     *
+     * @param string $filename
+     */
+    public function setFilename(string $filename);
 
-    public function setTTL($ttl);
+    /**
+     * Sets TTL in seconds
+     *
+     * @param int $ttl
+     */
+    public function setTTL(int $ttl);
 
-    public function setContent($content);
+    /**
+     *
+     * @param string $content
+     */
+    public function setContent(string $content);
 
+    /**
+     * Writes the content to the set filename
+     */
     public function write();
 
-    public function checkTTL();
+    /**
+     * Check if the file has still TTL
+     *
+     * @return bool
+     */
+    public function checkTTL(): bool;
 }

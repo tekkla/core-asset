@@ -30,57 +30,52 @@ abstract class AbstractAssetFileHandler implements AssetFileHandlerInterface
     protected $filename;
 
     /**
-     * (non-PHPdoc)
      *
-     * @see \Core\Asset\AssetFileInterface::setContent()
-     *
+     * {@inheritdoc}
+     * @see \Core\Asset\AssetFileHandlerInterface::setContent()
      */
-    public function setContent($content)
+    public function setContent(string $content)
     {
         $this->content = $content;
     }
 
     /**
-     * (non-PHPdoc)
      *
-     * @see \Core\Asset\AssetFileInterface::setTTL()
-     *
+     * {@inheritdoc}
+     * @see \Core\Asset\AssetFileHandlerInterface::setTTL()
      */
-    public function setTTL($ttl)
+    public function setTTL(int $ttl)
     {
         $this->ttl = $ttl;
     }
 
     /**
-     * (non-PHPdoc)
      *
-     * @see \Core\Asset\AssetFileInterface::setFilename()
-     *
+     * {@inheritdoc}
+     * @see \Core\Asset\AssetFileHandlerInterface::setFilename()
      */
-    public function setFilename($filename)
+    public function setFilename(string $filename)
     {
         $this->filename = $filename;
     }
 
     /**
      *
-     * {@inheritDoc}
-     *
+     * {@inheritdoc}
      * @see \Core\Asset\AssetFileHandlerInterface::checkTTL()
      */
-    public function checkTTL()
+    public function checkTTL(): bool
     {
-        if (!file_exists($this->filename) || filemtime($this->filename) + $this->ttl < time()) {
+        if (! file_exists($this->filename) || filemtime($this->filename) + $this->ttl < time()) {
             return false;
         }
-
+        
         return true;
     }
 
     /**
      *
-     * {@inheritDoc}
-     *
+     * {@inheritdoc}
      * @see \Core\Asset\AssetFileHandlerInterface::write()
      */
     public function write()

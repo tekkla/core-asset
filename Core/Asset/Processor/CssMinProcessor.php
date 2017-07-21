@@ -12,10 +12,9 @@ class CssMinProcessor implements ProcessorInterface
 {
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see \Core\Asset\ProcessorInterface::process()
-     *
+     * 
+     * {@inheritDoc}
+     * @see \Core\Asset\Processor\ProcessorInterface::process()
      */
     public function process($content)
     {

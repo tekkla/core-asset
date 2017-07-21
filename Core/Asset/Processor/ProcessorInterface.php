@@ -14,7 +14,7 @@ interface ProcessorInterface
     /**
      * Processes
      *
-     * @param unknown $content
+     * @param mixed $content
      */
     public function process($content);
 }

@@ -5,17 +5,16 @@ namespace Core\Asset\Processor;
  * JSMinProcessor.php
  *
  * @author Michael "Tekkla" Zorn <tekkla@tekkla.de>
- * @copyright 2016
+ * @copyright 2016-2017
  * @license MIT
  */
 class JSMinProcessor implements ProcessorInterface
 {
 
     /**
-     * (non-PHPdoc)
      *
-     * @see \Core\Asset\ProcessorInterface::process()
-     *
+     * {@inheritdoc}
+     * @see \Core\Asset\Processor\ProcessorInterface::process()
      */
     public function process($content)
     {
