@@ -7,7 +7,7 @@ use Core\Asset\AbstractAssetHandler;
  * CssHandler.php
  *
  * @author Michael "Tekkla" Zorn <tekkla@tekkla.de>
- * @copyright 2016
+ * @copyright 2016-2017
  * @license MIT
  */
 class CssHandler extends AbstractAssetHandler
@@ -67,9 +67,9 @@ class CssHandler extends AbstractAssetHandler
      *
      * @param string $url
      *
-     * @return CssObject
+     * @return CssObjectInterface
      */
-    public function &createLink($url)
+    public function &createLink($url): CssObjectInterface
     {
         $css = new CssObject();
 
@@ -86,9 +86,9 @@ class CssHandler extends AbstractAssetHandler
      *
      * @param string $styles
      *
-     * @return CssObject
+     * @return CssObjectInterface
      */
-    public function &createInline($styles)
+    public function &createInline($styles): CssObjectInterface
     {
         $css = new CssObject();
 
@@ -101,9 +101,11 @@ class CssHandler extends AbstractAssetHandler
     }
 
     /**
-     * Returns
+     * 
+     * {@inheritDoc}
+     * @see \Core\Asset\AbstractAssetHandler::getContent()
      */
-    public function getContent()
+    public function getContent(): string
     {
         if (empty($this->basedir)) {
             Throw new CssException('No basedir set.');
@@ -161,6 +163,6 @@ class CssHandler extends AbstractAssetHandler
             return $combined;
         }
 
-        return false;
+        return '';
     }
 }
